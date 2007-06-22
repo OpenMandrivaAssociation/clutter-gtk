@@ -18,6 +18,7 @@ License:       LGPL
 Group:         Graphics
 Url:           http://clutter-project.org/
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires: clutter-devel
 BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
 
