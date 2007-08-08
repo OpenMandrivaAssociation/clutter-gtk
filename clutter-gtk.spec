@@ -1,13 +1,11 @@
 %define name clutter-gtk
-%define version 0.1.0
+%define version 0.4.0
 %define release %mkrel 1
 
-%define api 1.0
+%define api 0.4
 %define major 0
 %define libname %mklibname %name %api %major
 %define libnamedevel %mklibname -d %name %api
-
-%define crapname cluttergtk
 
 Summary:       GTK Support for Clutter
 Name:          %{name}
@@ -34,8 +32,11 @@ Group:         Graphics
 %description -n %libname
 GTK Support for Clutter
 
-%post -n %libname -p /sbin/ldconfig
-%postun -n %libname -p /sbin/ldconfig
+%post -n %libname
+/sbin/ldconfig
+
+%postun -n %libname
+/sbin/ldconfig
 
 #----------------------------------------------------------------------------
 
@@ -67,13 +68,13 @@ rm -rf %buildroot
 
 %files -n %libname
 %defattr(-,root,root)
-%_libdir/lib%{crapname}-%{api}.so.*
+%_libdir/lib%{name}-%{api}.so.*
 
 %files -n %libnamedevel
-%_libdir/pkgconfig/%{name}.pc
-%_libdir/lib%{crapname}-%{api}.la
-%_libdir/lib%{crapname}-%{api}.so
-%dir %_includedir/clutter-0.2/%{name}
-%_includedir/clutter-0.2/%{name}/*.h
+%_libdir/pkgconfig/%{name}-%{api}.pc
+%_libdir/lib%{name}-%{api}.la
+%_libdir/lib%{name}-%{api}.so
+%dir %_includedir/clutter-%{api}/%{name}
+%_includedir/clutter-%{api}/%{name}/*.h
 %dir %_datadir/gtk-doc/html/%name
 %doc %_datadir/gtk-doc/html/%name/*
