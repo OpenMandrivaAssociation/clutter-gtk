@@ -1,6 +1,6 @@
 %define name clutter-gtk
 %define version 0.6.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define api 0.6
 %define major 0
@@ -21,7 +21,12 @@ BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
 
 %description
-GTK Support for Clutter
+A library providing facilities to integrate Clutter into GTK+
+applications. It provides a GTK+ widget, GtkClutterEmbed, for embedding the
+default ClutterStage into any GtkContainer.
+
+Because of limitations inside Clutter, it is only possible to embed a single
+ClutterStage.
 
 #----------------------------------------------------------------------------
 
@@ -30,7 +35,12 @@ Summary:       GTK Support for Clutter
 Group:         Graphics
 
 %description -n %libname
-GTK Support for Clutter
+A library providing facilities to integrate Clutter into GTK+
+applications. It provides a GTK+ widget, GtkClutterEmbed, for embedding the
+default ClutterStage into any GtkContainer.
+
+Because of limitations inside Clutter, it is only possible to embed a single
+ClutterStage.
 
 %post -n %libname
 /sbin/ldconfig
