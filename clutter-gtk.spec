@@ -42,8 +42,7 @@ default ClutterStage into any GtkContainer.
 Because of limitations inside Clutter, it is only possible to embed a single
 ClutterStage.
 
-%post -n %libname
-/sbin/ldconfig
+%post -n %libname -p /sbin/ldconfig
 
 %postun -n %libname
 /sbin/ldconfig
