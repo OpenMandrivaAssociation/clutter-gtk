@@ -42,10 +42,14 @@ default ClutterStage into any GtkContainer.
 Because of limitations inside Clutter, it is only possible to embed a single
 ClutterStage.
 
+%if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
+%endif
 
 %postun -n %libname
+%if %mdkversion < 200900
 /sbin/ldconfig
+%endif
 
 #----------------------------------------------------------------------------
 
