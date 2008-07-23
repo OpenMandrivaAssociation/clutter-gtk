@@ -1,6 +1,6 @@
 %define name clutter-gtk
 %define version 0.6.0
-%define release %mkrel 2
+%define release %mkrel 4
 
 %define api 0.6
 %define major 0
