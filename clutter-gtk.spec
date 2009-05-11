@@ -1,8 +1,13 @@
 %define name clutter-gtk
-%define version 0.8.3
+%define version 0.9.0
+%define git 20090511
+%if %git
+%define release %mkrel 0.%git.1
+%else
 %define release %mkrel 1
+%endif
 
-%define api 0.8
+%define api 0.9
 %define major 0
 %define libname %mklibname %name %api %major
 %define libnamedevel %mklibname -d %name %api
@@ -11,12 +16,16 @@ Summary:       GTK Support for Clutter
 Name:          %{name}
 Version:       %{version}
 Release:       %{release}
+%if %git
+Source0:       %{name}-%{git}.tar.bz2
+%else
 Source0:       http://www.clutter-project.org/sources/clutter-gtk/%api/%{name}-%{version}.tar.bz2
+%endif
 License:       LGPLv2+
 Group:         Graphics
 Url:           http://clutter-project.org/
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: clutter-devel
+BuildRequires: clutter-devel >= 0.9
 BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
 
@@ -65,7 +74,13 @@ Development headers/libraries for %name (see %libname package)
 #----------------------------------------------------------------------------
 
 %prep
+
+%if %git
+%setup -q -n %name
+./autogen.sh -V
+%else
 %setup -q
+%endif
 
 %build
 %configure2_5x --enable-gtk-doc
