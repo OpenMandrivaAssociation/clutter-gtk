@@ -1,5 +1,5 @@
 %define name clutter-gtk
-%define version 0.9.0
+%define version 0.9.1
 %define git 20090616
 %if %git
 %define release %mkrel 0.%git.1
