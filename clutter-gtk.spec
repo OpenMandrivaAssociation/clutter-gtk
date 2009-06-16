@@ -1,6 +1,6 @@
 %define name clutter-gtk
 %define version 0.9.0
-%define git 20090511
+%define git 20090616
 %if %git
 %define release %mkrel 0.%git.1
 %else
@@ -25,9 +25,14 @@ License:       LGPLv2+
 Group:         Graphics
 Url:           http://clutter-project.org/
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: clutter-devel >= 0.9
+BuildRequires: clutter-devel >= 0.9.3-0.20090616
 BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
+BuildRequires: gobject-introspection-devel >= 0.6.3-0.20090616
+#gw for Gtk-2.0.gir
+BuildRequires: gir-repository
+
+
 
 %description
 A library providing facilities to integrate Clutter into GTK+
@@ -104,5 +109,7 @@ rm -rf %buildroot
 %_libdir/lib%{name}-%{api}.so
 %dir %_includedir/clutter-%{api}/%{name}
 %_includedir/clutter-%{api}/%{name}/*.h
+%_datadir/gir-1.0/GtkClutter-%api.gir
+%_libdir/girepository-1.0/GtkClutter-%api.typelib
 %dir %_datadir/gtk-doc/html/%name
 %doc %_datadir/gtk-doc/html/%name/*
