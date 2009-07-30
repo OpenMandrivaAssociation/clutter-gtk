@@ -1,5 +1,5 @@
 %define name clutter-gtk
-%define version 0.9.2
+%define version 0.10.2
 %define git 0
 %if %git
 %define release %mkrel 0.%git.1
@@ -7,7 +7,8 @@
 %define release %mkrel 1
 %endif
 
-%define api 0.9
+%define api 0.10
+%define clutterapi 1.0
 %define major 0
 %define libname %mklibname %name %api %major
 %define libnamedevel %mklibname -d %name %api
@@ -25,7 +26,7 @@ License:       LGPLv2+
 Group:         Graphics
 Url:           http://clutter-project.org/
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: clutter-devel >= 0.9.3-0.20090616
+BuildRequires: clutter-devel >= 1.0
 BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
 BuildRequires: libtool
@@ -108,8 +109,8 @@ rm -rf %buildroot
 %_libdir/pkgconfig/%{name}-%{api}.pc
 %_libdir/lib%{name}-%{api}.la
 %_libdir/lib%{name}-%{api}.so
-%dir %_includedir/clutter-%{api}/%{name}
-%_includedir/clutter-%{api}/%{name}/*.h
+%dir %_includedir/clutter-%{clutterapi}/%{name}
+%_includedir/clutter-%{clutterapi}/%{name}/*.h
 %_datadir/gir-1.0/GtkClutter-%api.gir
 %_libdir/girepository-1.0/GtkClutter-%api.typelib
 %dir %_datadir/gtk-doc/html/%name
