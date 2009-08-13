@@ -29,7 +29,7 @@ BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: clutter-devel >= 1.0
 BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
-BuildRequires: docbook-dtd421-xml
+BuildRequires: docbook-dtd412-xml
 BuildRequires: gobject-introspection-devel >= 0.6.3-0.20090616
 #gw for Gtk-2.0.gir
 BuildRequires: gir-repository
