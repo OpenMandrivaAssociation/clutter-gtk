@@ -2,7 +2,7 @@
 %define version 0.10.2
 %define git 0
 %if ! %git
-%define release %mkrel 5
+%define release %mkrel 6
 %else
 %define release %mkrel 0.%git.1
 %endif
@@ -22,7 +22,8 @@ Source0:       %{name}-%{git}.tar.bz2
 %else
 Source0:       http://www.clutter-project.org/sources/clutter-gtk/%api/%{name}-%{version}.tar.bz2
 %endif
-Patch: clutter-gtk-0.10.2-new-gobject-introspection.patch
+Patch0: clutter-gtk-0.10.2-new-gobject-introspection.patch
+Patch1: clutter-gtk-0.10.2-remove-deprecated-gtk-symbols.patch
 License:       LGPLv2+
 Group:         Graphics
 Url:           http://clutter-project.org/
@@ -89,7 +90,7 @@ Development headers/libraries for %name (see %libname package)
 %else
 %setup -q
 %endif
-%patch -p1
+%apply_patches
 autoreconf -fi
 
 %build
