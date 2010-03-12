@@ -2,7 +2,7 @@
 %define version 0.10.2
 %define git 0
 %if ! %git
-%define release %mkrel 6
+%define release %mkrel 7
 %else
 %define release %mkrel 0.%git.1
 %endif
