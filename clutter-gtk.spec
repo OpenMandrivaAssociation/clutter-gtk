@@ -1,7 +1,7 @@
 %define name clutter-gtk
-%define version 0.10.6
+%define version 0.10.8
 %define git 0
-%define rel 3
+%define rel 1
 %if ! %git
 %define release %mkrel %rel
 %else
@@ -23,7 +23,6 @@ Source0:       %{name}-%{git}.tar.bz2
 %else
 Source0:       http://www.clutter-project.org/sources/clutter-gtk/%api/%{name}-%{version}.tar.bz2
 %endif
-Patch0:	clutter-gtk-build-with-new-gtk.patch
 License:       LGPLv2+
 Group:         Graphics
 Url:           http://clutter-project.org/
