@@ -1,7 +1,7 @@
 %define name clutter-gtk
 %define version 0.10.8
 %define git 0
-%define rel 1
+%define rel 2
 %if ! %git
 %define release %mkrel %rel
 %else
@@ -23,6 +23,7 @@ Source0:       %{name}-%{git}.tar.bz2
 %else
 Source0:       http://www.clutter-project.org/sources/clutter-gtk/%api/%{name}-%{version}.tar.bz2
 %endif
+Patch0:	       clutter-gtk-0.10.8-gi-0.9.patch
 License:       LGPLv2+
 Group:         Graphics
 Url:           http://clutter-project.org/
@@ -92,6 +93,7 @@ Development headers/libraries for %name (see %libname package)
 %apply_patches
 
 %build
+autoreconf -fi
 %configure2_5x --enable-gtk-doc
 %make
 
