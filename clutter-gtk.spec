@@ -1,7 +1,7 @@
 %define name clutter-gtk
 %define version 0.10.8
 %define git 0
-%define rel 2
+%define rel 3
 %if ! %git
 %define release %mkrel %rel
 %else
