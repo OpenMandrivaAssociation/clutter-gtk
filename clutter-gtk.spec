@@ -15,7 +15,7 @@ Url:		http://clutter-project.org/
 Source0:	http://www.clutter-project.org/sources/clutter-gtk/%{api}/%{name}-%{version}.tar.xz
 
 BuildRequires: clutter-devel >= 1.0
-BuildRequires: gtk3-devel
+BuildRequires: gtk+3-devel
 BuildRequires: gtk-doc
 BuildRequires: docbook-dtd412-xml
 BuildRequires: gobject-introspection-devel >= 0.6.3-0.20090616
