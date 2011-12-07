@@ -1,4 +1,4 @@
-%define api 0.10
+%define api 1.0
 %define major 0
 %define gir_major 1.0
 %define libname		%mklibname %{name} %{api} %{major}
@@ -72,6 +72,7 @@ Development headers/libraries for %{name} (see %{libname} package)
 rm -rf %{buildroot}
 %makeinstall
 find %{buildroot} -name *.la | xargs rm
+%find_lang cluttergtk-%{api}
 
 %files -n %{libname}
 %defattr(-,root,root)
@@ -80,11 +81,12 @@ find %{buildroot} -name *.la | xargs rm
 %files -n %{girname}
 %{_libdir}/girepository-1.0/GtkClutter-%{api}.typelib
 
-%files -n %{develname}
+%files -n %{develname} -f cluttergtk-%{api}.lang
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
 %{_libdir}/lib%{name}-%{api}.so
-%dir %{_includedir}/clutter-%{api}/%{name}
+%dir %{_includedir}/clutter-gtk-%{api}/%{name}
+%{_includedir}/clutter-gtk-%{api}/%{name}/
 %{_datadir}/gir-1.0/GtkClutter-%{api}.gir
-%dir %{_datadir}/gtk-doc/html/%{name}
-%doc %{_datadir}/gtk-doc/html/%{name}/*
+%dir %{_datadir}/gtk-doc/html/%{name}-%{api}
+%doc %{_datadir}/gtk-doc/html/%{name}-%{api}/*
 
