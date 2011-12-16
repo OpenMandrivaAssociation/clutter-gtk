@@ -1,24 +1,42 @@
-%define api 1.0
+%define name clutter-gtk
+%define version 0.10.8
+%define git 0
+%define rel 5
+%if ! %git
+%define release %mkrel %rel
+%else
+%define release %mkrel -c %git %rel
+%endif
+
+%define api 0.10
+%define clutterapi 1.0
 %define major 0
-%define gir_major 1.0
-%define libname		%mklibname %{name} %{api} %{major}
-%define girname     %mklibname %{name}-gir %{api}
-%define develname	%mklibname -d %{name} %{api}
+%define libname %mklibname %name %api %major
+%define libnamedevel %mklibname -d %name %api
 
-Summary:	GTK Support for Clutter
-Name:		clutter-gtk
-Version:	1.0.4
-Release:	1
-License:	LGPLv2+
-Group:		Graphics
-Url:		http://clutter-project.org/
-Source0:	http://www.clutter-project.org/sources/clutter-gtk/%{api}/%{name}-%{version}.tar.xz
-
+Summary:       GTK Support for Clutter
+Name:          %{name}
+Version:       %{version}
+Release:       %{release}
+%if %git
+Source0:       %{name}-%{git}.tar.bz2
+%else
+Source0:       http://www.clutter-project.org/sources/clutter-gtk/%api/%{name}-%{version}.tar.bz2
+%endif
+Patch0:	       clutter-gtk-0.10.8-gi-0.9.patch
+License:       LGPLv2+
+Group:         Graphics
+Url:           http://clutter-project.org/
+BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: clutter-devel >= 1.0
-BuildRequires: gtk+3-devel
+BuildRequires: gtk2-devel
 BuildRequires: gtk-doc
 BuildRequires: docbook-dtd412-xml
 BuildRequires: gobject-introspection-devel >= 0.6.3-0.20090616
+#gw for Gtk-2.0.gir
+BuildRequires: gir-repository
+
+
 
 %description
 A library providing facilities to integrate Clutter into GTK+
@@ -28,11 +46,13 @@ default ClutterStage into any GtkContainer.
 Because of limitations inside Clutter, it is only possible to embed a single
 ClutterStage.
 
-%package -n %{libname}
-Summary:	GTK Support for Clutter
-Group:		Graphics
+#----------------------------------------------------------------------------
 
-%description -n %{libname}
+%package -n %libname
+Summary:       GTK Support for Clutter
+Group:         Graphics
+
+%description -n %libname
 A library providing facilities to integrate Clutter into GTK+
 applications. It provides a GTK+ widget, GtkClutterEmbed, for embedding the
 default ClutterStage into any GtkContainer.
@@ -40,53 +60,61 @@ default ClutterStage into any GtkContainer.
 Because of limitations inside Clutter, it is only possible to embed a single
 ClutterStage.
 
-%package -n %{girname}
-Summary:    GObject Introspection interface description for %{name}
-Group:      System/Libraries
-Requires:   %{libname} = %{version}-%{release}
+%if %mdkversion < 200900
+%post -n %libname -p /sbin/ldconfig
+%endif
 
-%description -n %{girname}
-GObject Introspection interface description for %{name}.
+%postun -n %libname
+%if %mdkversion < 200900
+/sbin/ldconfig
+%endif
 
-%package -n %{develname}
-Summary:       Development headers/libraries for %{name}
+#----------------------------------------------------------------------------
+
+%package -n %libnamedevel
+Summary:       Development headers/libraries for %name
 Group:         Development/X11
-Provides:      %{name}-devel = %{version}-%{release}
-Requires:      %{libname} = %{version}-%{release}
+Provides:      %name-devel = %version-%release
+Requires:      %libname = %version-%release
 
-%description -n %{develname}
-Development headers/libraries for %{name} (see %{libname} package)
+%description -n %libnamedevel
+Development headers/libraries for %name (see %libname package)
+
+#----------------------------------------------------------------------------
 
 %prep
+
+%if %git
+%setup -q -n %name
+./autogen.sh -V
+%else
 %setup -q
+%endif
 %apply_patches
 
 %build
-%configure2_5x \
-	--disable-static \
-	--enable-gtk-doc
-
+autoreconf -fi
+%configure2_5x --enable-gtk-doc
 %make
 
 %install
-rm -rf %{buildroot}
+rm -rf %buildroot
+
 %makeinstall
-find %{buildroot} -name *.la | xargs rm
-%find_lang cluttergtk-%{api}
 
-%files -n %{libname}
+%clean
+rm -rf %buildroot
+
+%files -n %libname
 %defattr(-,root,root)
-%{_libdir}/lib%{name}-%{api}.so.%{major}*
+%_libdir/lib%{name}-%{api}.so.%{major}*
+%_libdir/girepository-1.0/GtkClutter-%api.typelib
 
-%files -n %{girname}
-%{_libdir}/girepository-1.0/GtkClutter-%{api}.typelib
-
-%files -n %{develname} -f cluttergtk-%{api}.lang
-%{_libdir}/pkgconfig/%{name}-%{api}.pc
-%{_libdir}/lib%{name}-%{api}.so
-%dir %{_includedir}/clutter-gtk-%{api}/%{name}
-%{_includedir}/clutter-gtk-%{api}/%{name}/
-%{_datadir}/gir-1.0/GtkClutter-%{api}.gir
-%dir %{_datadir}/gtk-doc/html/%{name}-%{api}
-%doc %{_datadir}/gtk-doc/html/%{name}-%{api}/*
-
+%files -n %libnamedevel
+%_libdir/pkgconfig/%{name}-%{api}.pc
+%_libdir/lib%{name}-%{api}.so
+%dir %_includedir/clutter-%{clutterapi}/%{name}
+%_includedir/clutter-%{clutterapi}/%{name}/*.h
+%_datadir/gir-1.0/GtkClutter-%api.gir
+%dir %_datadir/gtk-doc/html/%name
+%doc %_datadir/gtk-doc/html/%name/*
