@@ -24,6 +24,7 @@ Source0:       %{name}-%{git}.tar.bz2
 Source0:       http://www.clutter-project.org/sources/clutter-gtk/%api/%{name}-%{version}.tar.bz2
 %endif
 Patch0:	       clutter-gtk-0.10.8-gi-0.9.patch
+Patch1:        clutter-gtk-0.10.8-fix-linking.patch
 License:       LGPLv2+
 Group:         Graphics
 Url:           http://clutter-project.org/
@@ -91,9 +92,9 @@ Development headers/libraries for %name (see %libname package)
 %setup -q
 %endif
 %apply_patches
+autoreconf -fi
 
 %build
-autoreconf -fi
 %configure2_5x --enable-gtk-doc
 %make
 
