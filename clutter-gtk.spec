@@ -7,7 +7,7 @@
 Summary:	GTK Support for Clutter
 Name:		clutter-gtk
 Version:	1.6.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		Graphics
 Url:		http://clutter-project.org/
