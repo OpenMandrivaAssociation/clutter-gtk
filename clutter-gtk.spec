@@ -6,7 +6,7 @@
 
 Summary:	GTK Support for Clutter
 Name:		clutter-gtk
-Version:	1.6.0
+Version:	1.6.6
 Release:	4
 License:	LGPLv2+
 Group:		Graphics
@@ -71,7 +71,7 @@ Development headers/libraries for %{name}
 %makeinstall
 %find_lang cluttergtk-%{api}
 
-%files -n %{libname} -f cluttergtk-%{api}.lang 
+%files -n %{libname} -f cluttergtk-%{api}.lang
 %{_libdir}/lib%{name}-%{api}.so.%{major}*
 
 %files -n %{girname}
