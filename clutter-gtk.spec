@@ -6,12 +6,12 @@
 
 Summary:	GTK Support for Clutter
 Name:		clutter-gtk
-Version:	1.6.6
+Version:	1.8.4
 Release:	4
 License:	LGPLv2+
 Group:		Graphics
 Url:		http://clutter-project.org/
-Source0:	http://www.clutter-project.org/sources/clutter-gtk/%{api}/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/gnome/sources/clutter-gtk/1.8/%{name}-%{version}.tar.xz
 
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gtk-doc
