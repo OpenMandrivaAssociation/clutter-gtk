@@ -14,8 +14,7 @@ Url:		http://clutter-project.org/
 Source0:	http://ftp.gnome.org/pub/gnome/sources/clutter-gtk/1.8/%{name}-%{version}.tar.xz
 
 BuildRequires:	docbook-dtd412-xml
-#Looks like gtk-doc is not needed anymore. Disable it for allow build ARMv7 (penguin).
-#BuildRequires:	gtk-doc
+BuildRequires:	gtk-doc
 BuildRequires:	pkgconfig(clutter-1.0)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
