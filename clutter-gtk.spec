@@ -10,7 +10,7 @@ Version:	1.8.4
 Release:	8
 License:	LGPLv2+
 Group:		Graphics
-Url:		http://clutter-project.org/
+Url:		https://clutter-project.org/
 Source0:	http://ftp.gnome.org/pub/gnome/sources/clutter-gtk/1.8/%{name}-%{version}.tar.xz
 
 BuildRequires:	docbook-dtd412-xml
